@@ -1,0 +1,12 @@
+{
+  "name": "hello-world",
+  "version": "0.0.1",
+  "description": "Another hello world program!",
+  "main": "index.js",
+  "repository": "https://github.com/MickyJimbo/hello-world.git",
+  "author": "Michael Payne <mickyjimbo@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "three": "^0.87.1"
+  }
+}
