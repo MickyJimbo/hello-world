@@ -8,5 +8,10 @@
   "license": "MIT",
   "dependencies": {
     "three": "^0.87.1"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-browserify": "^0.5.1",
+    "gulp-rename": "^1.2.2"
   }
 }

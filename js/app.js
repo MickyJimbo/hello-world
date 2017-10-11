@@ -1,3 +1,6 @@
+// Requirements
+var THREE = require('three');
+
 // Scene
 var scene = new THREE.Scene();
 
@@ -24,7 +27,7 @@ var renderer  = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
-function render() {
+render = ()=> {
   requestAnimationFrame(render);
 
   // Scene changes
