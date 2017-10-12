@@ -23,9 +23,17 @@ var ambLight = new THREE.AmbientLight(0xffffff, 1);
 scene.add(ambLight);
 
 // Renderer
-var renderer  = new THREE.WebGLRenderer();
+var renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
+
+// Screen resize
+onWindowResize = () => {
+  camera.aspect = window.innerWidth/window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+}
+window.addEventListener('resize', onWindowResize, false);
 
 render = ()=> {
   requestAnimationFrame(render);
