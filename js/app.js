@@ -10,17 +10,29 @@ var renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
+var worldUpVector = new THREE.Vector3(0, 0, 1);
+
 // Camera
 var camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 10000);
-camera.position.z = 5;
+camera.up = worldUpVector;
+camera.position.set(4, 4, 4);
 
+// Camera controls
 var controls = new THREE.OrbitControls(camera, renderer.domElement)
+
+// Grid
+var grid = new THREE.GridHelper(25, 25);
+grid.rotation.x = 90 * (Math.PI/180);
+scene.add(grid);
 
 // Geometry
 var geometry = new THREE.BoxGeometry(1, 1, 1);
 var material = new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.9 });
 var cube = new THREE.Mesh(geometry, material);
+cube.position.set(0, 0, 2);
 scene.add(cube);
+
+camera.lookAt(cube.position);
 
 // Lighting
 var pointLight = new THREE.PointLight(0xffffff, 1, 100, 2);
@@ -38,6 +50,7 @@ onWindowResize = () => {
 }
 window.addEventListener('resize', onWindowResize, false);
 
+//Render loop
 render = ()=> {
   requestAnimationFrame(render);
 
