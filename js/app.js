@@ -1,12 +1,20 @@
 // Requirements
 var THREE = require('three');
+require('./three-orbit-controls.js')(THREE)
 
 // Scene
 var scene = new THREE.Scene();
 
+// Renderer
+var renderer = new THREE.WebGLRenderer();
+renderer.setSize(window.innerWidth, window.innerHeight);
+document.body.appendChild(renderer.domElement);
+
 // Camera
 var camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 10000);
 camera.position.z = 5;
+
+var controls = new THREE.OrbitControls(camera, renderer.domElement)
 
 // Geometry
 var geometry = new THREE.BoxGeometry(1, 1, 1);
@@ -21,11 +29,6 @@ scene.add(pointLight);
 
 var ambLight = new THREE.AmbientLight(0xffffff, 1);
 scene.add(ambLight);
-
-// Renderer
-var renderer = new THREE.WebGLRenderer();
-renderer.setSize(window.innerWidth, window.innerHeight);
-document.body.appendChild(renderer.domElement);
 
 // Screen resize
 onWindowResize = () => {
