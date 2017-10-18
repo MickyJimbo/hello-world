@@ -28,13 +28,15 @@ scene.add(grid);
 
 //Materials
 //var material = new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.9 });
+
 var material = new THREE.ShaderMaterial({
+  uniforms: THREE.MyShader.uniforms,
   vertexShader: THREE.MyShader.vertexShader,
   fragmentShader: THREE.MyShader.fragmentShader
 });
 
 // Geometry
-var geometry = new THREE.BoxGeometry(1, 1, 1);
+var geometry = new THREE.SphereGeometry(1, 20, 20);
 var cube = new THREE.Mesh(geometry, material);
 cube.position.set(0, 0, 2);
 scene.add(cube);
