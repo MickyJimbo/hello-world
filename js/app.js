@@ -1,6 +1,7 @@
 // Requirements
 var THREE = require('three');
-require('./three-orbit-controls.js')(THREE)
+require('./three-orbit-controls.js')(THREE);
+require('./myShader.js')(THREE);
 
 // Scene
 var scene = new THREE.Scene();
@@ -25,9 +26,15 @@ var grid = new THREE.GridHelper(25, 25);
 grid.rotation.x = 90 * (Math.PI/180);
 scene.add(grid);
 
+//Materials
+//var material = new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.9 });
+var material = new THREE.ShaderMaterial({
+  vertexShader: THREE.MyShader.vertexShader,
+  fragmentShader: THREE.MyShader.fragmentShader
+});
+
 // Geometry
 var geometry = new THREE.BoxGeometry(1, 1, 1);
-var material = new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.9 });
 var cube = new THREE.Mesh(geometry, material);
 cube.position.set(0, 0, 2);
 scene.add(cube);
