@@ -36,12 +36,16 @@ var material = new THREE.ShaderMaterial({
 });
 
 // Geometry
-var geometry = new THREE.SphereGeometry(1, 20, 20);
-var cube = new THREE.Mesh(geometry, material);
-cube.position.set(0, 0, 2);
-scene.add(cube);
+var geometry = new THREE.SphereBufferGeometry(1, 20, 20);
+var sphere = new THREE.Mesh(geometry, material);
+sphere.position.set(0, 0, 2);
+scene.add(sphere);
 
-camera.lookAt(cube.position);
+var displacement = new Float32Array(geometry.attributes.position.count)
+
+geometry.addAttribute('displacement', new THREE.BufferAttribute(displacement, 1));
+
+camera.lookAt(sphere.position);
 
 // Lighting
 var pointLight = new THREE.PointLight(0xffffff, 1, 100, 2);
@@ -60,12 +64,21 @@ onWindowResize = () => {
 window.addEventListener('resize', onWindowResize, false);
 
 //Render loop
+var counter = 0
 render = ()=> {
   requestAnimationFrame(render);
 
   // Scene changes
-  cube.rotation.x += 0.01;
-  cube.rotation.y += 0.01;
+  sphere.rotation.x += 0.01;
+  sphere.rotation.y += 0.01;
+
+  counter++;
+  if(counter % 10 == 0){
+    for(var i = 0; i < displacement.length; i++){
+      displacement[i] = Math.random() * 0.2;
+    }
+  }
+  sphere.geometry.attributes.displacement.needsUpdate = true;
 
   renderer.render(scene, camera);
 }
